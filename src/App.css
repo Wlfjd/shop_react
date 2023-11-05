@@ -1,3 +1,17 @@
 .App {
   text-align: center;
 }
+.main-bg{
+  height:300px;
+  background-size: cover;
+  background-position: center;
+  /* background-image: url('./img/bg.png'); */
+}
+
+h4{
+  font-size: 16px;
+}
+
+p{
+  font-size: 14px;
+}
