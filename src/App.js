@@ -1,3 +1,4 @@
+import React, { useState,useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Navbar, Container, Nav, Row, Col}  from 'react-bootstrap';
@@ -5,6 +6,7 @@ import img from './img/bg.png'
 import data from './data.json'
 import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom'
 import { Detail } from './pages/Detail';
+import axios from 'axios';
 
 
 function App() {
@@ -34,14 +36,46 @@ function App() {
   );
 }
 function Main(){
+  let [shoes,setShoes]=useState(data);
+  let [click,setClick]=useState(0);
+  let [isLoading,setIsLoading]=useState(false)
+
+   useEffect(()=>{
+    if(click===1){
+      setIsLoading(true)
+      axios.get('https://codingapple1.github.io/shop/data2.json')
+        .then((res)=>{
+          data.push(...res.data)
+          setShoes((prev)=>[...prev,...res.data])
+          setIsLoading(false)})
+          
+        .catch(()=> {
+          console.log('요청 실패')
+          setIsLoading(false)})
+    } else if (click===2){
+      axios.get('https://codingapple1.github.io/shop/data3.json')
+        .then((res)=>{
+          data.push(...res.data)
+          setShoes((prev)=>[...prev,...res.data])
+          setIsLoading(false)})
+        .catch(()=> {
+          console.log('요청 실패')
+          setIsLoading(false)}) 
+    }
+  },[click])
+
   return(
     <>
     <div className='main-bg' style={{backgroundImage:`url(${img})`}}></div>
     <Container>
       <Row>
-        <Card data={data}></Card>     
+        <Card data={shoes}></Card>     
       </Row>
     </Container>
+    {click <2 && <button onClick={()=>{
+     setClick((prev)=>prev+1) 
+   }}>다음</button>}
+   { isLoading && <p className="alert alert-danger"> 로딩중입니다</p>}
     </>
   )
 }
@@ -49,9 +83,9 @@ function Card({data}){
   return(
     <>
       {data.map((item,i)=>(
-        <Col key={i}>
+        <Col key={i} xs={4}>
             <Link to={`/detail/${i}`}>
-            <img src={item.img} alt="img" width="80%" />
+            <img src={`https://codingapple1.github.io/shop/shoes${i+1}.jpg`} alt="img" width="80%" />
             <h4>{item.title}</h4>
             <p>{item.price}원</p>
            </Link>
