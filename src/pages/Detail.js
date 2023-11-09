@@ -47,5 +47,17 @@ export function Detail({data}){
   }
 
   function TabContent({tab}){
-    return [<div>상세정보입니다</div>,<div>구매 후기입니다</div>,<div>질문 게시판입니다</div>][tab]
+
+    let [addClass,setAddClass]= useState(false)
+
+    //tab 상태가 변할 때마다 코드를 실행시키기 위해 useEffect 사용
+    useEffect(()=>{
+      document.querySelector('.start').classList.add('end')
+    },[tab])
+
+    return (
+      <div className={`start `}>
+        {[<div>상세정보입니다</div>,<div>구매 후기입니다</div>,<div>질문 게시판입니다</div>][tab]}
+      </div>
+    )
   }
