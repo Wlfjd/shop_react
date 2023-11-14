@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect, createContext } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import { Navbar, Container, Nav, Row, Col}  from 'react-bootstrap';
@@ -8,9 +8,13 @@ import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom'
 import { Detail } from './pages/Detail';
 import axios from 'axios';
 
+// state 보관함
+export let Context= createContext()
+
 
 function App() {
   //페이지 이동을 도와주는 함수
+  let [stock,setStock]=useState([10,11,12])
   let navigate= useNavigate()
   return (
     <div className="App">
@@ -25,7 +29,11 @@ function App() {
       </Navbar>     
       <Routes>
         <Route path='/' element={<Main></Main>}></Route>
-        <Route path='/detail/:id' element={<Detail data={data}></Detail>}></Route>
+        <Route path='/detail/:id' element={
+          <Context.Provider value={{stock}}>
+            <Detail data={data} />
+          </Context.Provider>
+        }></Route>
         <Route path='/event' element={<Event></Event>}>
           <Route path="service" element={<div>첫 주문 시 양배추즙 서비스</div>} />
           <Route path="coupon" element={<div>생일기념 쿠폰받기</div>} />
@@ -37,6 +45,7 @@ function App() {
 }
 function Main(){
   let [shoes,setShoes]=useState(data);
+
   let [click,setClick]=useState(0);
   let [isLoading,setIsLoading]=useState(false)
 

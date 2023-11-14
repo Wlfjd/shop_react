@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useEffect, useState } from "react"
 import { Nav } from 'react-bootstrap'
 import { useParams } from "react-router-dom"
 
+import {Context} from './../App.js'
+
 
 export function Detail({data}){
+
+  let {stock}= useContext(Context)
+
   let {id}= useParams()
   let [show,setShow]=useState(true)
   let [tab,setTab]=useState(0)
@@ -47,7 +52,7 @@ export function Detail({data}){
   }
 
   function TabContent({tab,data}){
-
+    let {stock}= useContext(Context)
     let [addClass,setAddClass]= useState(false)
 
     //tab 상태가 변할 때마다 코드를 실행시키기 위해 useEffect 사용
@@ -59,7 +64,7 @@ export function Detail({data}){
 
     return (
       <div className={`start ${addClass ? 'end': ''}`}>
-        {[<div>{data[0].title}상세정보입니다</div>,<div>구매 후기입니다</div>,<div>질문 게시판입니다</div>][tab]}
+        {[<div>{data[0].title}상세정보입니다{stock}</div>,<div>구매 후기입니다</div>,<div>질문 게시판입니다</div>][tab]}
       </div>
     )
   }
