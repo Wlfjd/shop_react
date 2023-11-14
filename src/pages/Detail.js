@@ -41,23 +41,25 @@ export function Detail({data}){
             <Nav.Link onClick={()=>setTab(2)} eventKey="link2">질문</Nav.Link>
           </Nav.Item>
       </Nav>
-      <TabContent tab={tab}/>
+      <TabContent tab={tab} data={data}/>
       </>
     )
   }
 
-  function TabContent({tab}){
+  function TabContent({tab,data}){
 
     let [addClass,setAddClass]= useState(false)
 
     //tab 상태가 변할 때마다 코드를 실행시키기 위해 useEffect 사용
     useEffect(()=>{
-      document.querySelector('.start').classList.add('end')
+      setTimeout(() => setAddClass(true), 500);
+      return () => setAddClass(false);
+      
     },[tab])
 
     return (
-      <div className={`start `}>
-        {[<div>상세정보입니다</div>,<div>구매 후기입니다</div>,<div>질문 게시판입니다</div>][tab]}
+      <div className={`start ${addClass ? 'end': ''}`}>
+        {[<div>{data[0].title}상세정보입니다</div>,<div>구매 후기입니다</div>,<div>질문 게시판입니다</div>][tab]}
       </div>
     )
   }

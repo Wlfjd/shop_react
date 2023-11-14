@@ -35,5 +35,5 @@ a{
 
 .end{
   opacity: 1;
-  transition: all 0.5s
+  transition: opacity 0.5s
 }
