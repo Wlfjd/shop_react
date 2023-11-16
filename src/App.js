@@ -47,7 +47,6 @@ function App() {
 }
 function Main(){
   let [shoes,setShoes]=useState(data);
-
   let [click,setClick]=useState(0);
   let [isLoading,setIsLoading]=useState(false)
 
@@ -83,7 +82,7 @@ function Main(){
         <Card data={shoes}></Card>     
       </Row>
     </Container>
-    {click <2 && <button onClick={()=>{
+    {click <2 && <button className="alert alert-primary p-1" onClick={()=>{
      setClick((prev)=>prev+1) 
    }}>다음</button>}
    { isLoading && <p className="alert alert-danger"> 로딩중입니다</p>}
