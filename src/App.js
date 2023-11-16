@@ -7,6 +7,7 @@ import data from './data.json'
 import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom'
 import { Detail } from './pages/Detail';
 import axios from 'axios';
+import { Cart } from './pages/Cart';
 
 // state 보관함
 export let Context= createContext()
@@ -23,7 +24,7 @@ function App() {
         <Navbar.Brand href="#home">Shoe Shop</Navbar.Brand>
         <Nav className="me-auto">   
           <Nav.Link href="/detail">상세페이지</Nav.Link>
-          <Nav.Link onClick={()=>navigate('/detail')}>상세페이지</Nav.Link>
+          <Nav.Link onClick={()=>navigate('/cart')}>장바구니</Nav.Link>
         </Nav>
         </Container>
       </Navbar>     
@@ -38,6 +39,7 @@ function App() {
           <Route path="service" element={<div>첫 주문 시 양배추즙 서비스</div>} />
           <Route path="coupon" element={<div>생일기념 쿠폰받기</div>} />
         </Route>
+        <Route path='/cart' element={<Cart></Cart>}></Route>
         <Route path='*' element={<div>없는 페이지에요</div>}></Route>
       </Routes>
       </div>
