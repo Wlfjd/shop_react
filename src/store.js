@@ -1,5 +1,14 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit'
 
+let user=createSlice({
+    name:'user',
+    initialState:{name:'jiwon',age:25},
+    reducers:{
+        changeName(state){
+
+        }
+    }
+})
 
 let cart= createSlice({
     name:'cart',
@@ -9,16 +18,18 @@ let cart= createSlice({
       ], 
       //state 변경 함수 만드는 곳
     reducers:{
-        changeName(state){
-            
+        changeCount(state,action){
+            const index=state.findIndex((i)=>i.id===action.payload) //[0,1,...]
+            state[index].count+=1
         }
     }
 })
 
-export let {changeName} = cart.actions
+export let {changeCount} = cart.actions
 
 export default configureStore({
   reducer: { 
-    cart:cart.reducer
+    cart:cart.reducer,
+    user:user.reducer
   }
 }) 
