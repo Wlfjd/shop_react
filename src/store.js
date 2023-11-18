@@ -21,11 +21,14 @@ let cart= createSlice({
         changeCount(state,action){
             const index=state.findIndex((i)=>i.id===action.payload) //[0,1,...]
             state[index].count+=1
+        },
+        changeItem(state,action){
+            state.push(action.payload)
         }
     }
 })
 
-export let {changeCount} = cart.actions
+export let {changeCount,changeItem} = cart.actions
 
 export default configureStore({
   reducer: { 

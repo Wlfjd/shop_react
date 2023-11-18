@@ -4,15 +4,20 @@ import { Nav } from 'react-bootstrap'
 import { useParams } from "react-router-dom"
 
 import {Context} from './../App.js'
+import { useDispatch, useSelector } from 'react-redux'
+import { changeItem } from '../store.js'
 
 
 export function Detail({data}){
+  let state2= useSelector((state)=>{return state})
+  let dispatch=useDispatch()
 
   let {stock}= useContext(Context)
 
   let {id}= useParams()
   let [show,setShow]=useState(true)
   let [tab,setTab]=useState(0)
+
 
   useEffect(()=>{
     setTimeout(()=>{
@@ -31,7 +36,9 @@ export function Detail({data}){
             <h4 className="pt-5">{data[id]?.title}</h4>
             <p>{data[id]?.content}</p>
             <p>{data[id]?.price}원</p>
-            <button className="btn btn-danger">주문하기</button> 
+            <button className="btn btn-danger" onClick={()=>{
+              console.log(data[id])
+                dispatch(changeItem(data[id]))}}>주문하기</button> 
           </div>
         </div>
       </div> 
