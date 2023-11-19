@@ -1,10 +1,9 @@
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { changeCount, deleteItem } from "../store";
+import { changeCount,  deleteItem } from "../store";
 
 
 export function Cart(){
-
 let state= useSelector((state)=>{return state})
 let dispatch=useDispatch()
 

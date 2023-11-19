@@ -12,16 +12,16 @@ import { Cart } from './pages/Cart';
 // state 보관함
 export let Context= createContext()
 
-
 function App() {
-  //페이지 이동을 도와주는 함수
   let [stock,setStock]=useState([10,11,12])
+
+  //페이지 이동을 도와주는 함수
   let navigate= useNavigate()
   return (
     <div className="App">
     <Navbar bg="light" variant="light">
         <Container>
-        <Navbar.Brand onClick={()=>navigate('/')}>Shoe Shop</Navbar.Brand>
+        <Navbar.Brand onClick={()=>navigate('/')} style={{cursor:'pointer'}}>Shoe Shop</Navbar.Brand>
         <Nav className="me-right">   
           <Nav.Link onClick={()=>navigate('/cart')}>장바구니</Nav.Link>
         </Nav>
@@ -50,12 +50,12 @@ function Main(){
   let [isLoading,setIsLoading]=useState(false)
 
    useEffect(()=>{
-    console.log(click)
     if(click===1){
       setIsLoading(true)
       axios.get('https://codingapple1.github.io/shop/data2.json')
         .then((res)=>{
-          data.push(...res.data)
+          //data.push(...res.data)
+          setShoes((prev)=>[...prev,...res.data])
           setIsLoading(false)})
         .catch(()=> {
           console.log('요청 실패')
@@ -63,7 +63,8 @@ function Main(){
     } else if (click===2){
       axios.get('https://codingapple1.github.io/shop/data3.json')
         .then((res)=>{
-          data.push(...res.data)
+        // data.push(...res.data)
+         setShoes((prev)=>[...prev,...res.data])
           setIsLoading(false)})
         .catch(()=> {
           console.log('요청 실패')
@@ -80,13 +81,13 @@ function Main(){
       </Row>
     </Container>
     {click < 2 && <button className="alert alert-primary p-1" onClick={()=>{
-      console.log(click)
      setClick((prev)=>prev+1) 
    }}>다음</button>}
    { isLoading && <p className="alert alert-danger"> 로딩중입니다</p>}
     </>
   )
 }
+
 function Card({data}){
   return(
     <>

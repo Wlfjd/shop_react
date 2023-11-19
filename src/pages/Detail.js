@@ -10,8 +10,6 @@ import { changeItem } from '../store.js'
 
 export function Detail({data}){
   let dispatch=useDispatch()
-  let {stock}= useContext(Context)
-
   let {id}= useParams()
   let [show,setShow]=useState(true)
   let [tab,setTab]=useState(0)
@@ -68,7 +66,7 @@ export function Detail({data}){
 
     return (
       <div className={`start ${addClass ? 'end': ''}`}>
-        {[<div>{data[0].title}상세정보입니다{stock}</div>,<div>구매 후기입니다</div>,<div>질문 게시판입니다</div>][tab]}
+        {[<div>{data[0].title}의 상세정보입니다<p>재고:{stock[0]}</p></div>,<div>구매 후기입니다</div>,<div>질문 게시판입니다</div>][tab]}
       </div>
     )
   }
