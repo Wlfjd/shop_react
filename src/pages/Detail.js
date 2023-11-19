@@ -37,7 +37,6 @@ export function Detail({data}){
             <p>{data[id]?.content}</p>
             <p>{data[id]?.price}원</p>
             <button className="btn btn-danger" onClick={()=>{
-              console.log(data[id])
                 dispatch(changeItem({id:data[id].id, name:data[id].title , count:1}))}}>주문하기</button> 
           </div>
         </div>

@@ -2,7 +2,7 @@ import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Button
  from 'react-bootstrap/Button';
-import { changeCount } from "../store";
+import { changeCount, deleteItem } from "../store";
 
 
 export function Cart(){
@@ -32,6 +32,9 @@ let dispatch=useDispatch()
                             className="alert alert-primary my-0 p-1"
                             onClick={()=>{
                                 dispatch(changeCount(item.id))}}>+</button></td>
+                    <td><button 
+                            onClick={()=>{
+                                dispatch(deleteItem(item))}}>🗑</button></td>
                     </tr>
                 )}
             

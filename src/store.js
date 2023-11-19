@@ -3,11 +3,7 @@ import { configureStore, createSlice } from '@reduxjs/toolkit'
 let user=createSlice({
     name:'user',
     initialState:{name:'jiwon',age:25},
-    reducers:{
-        changeName(state){
-
-        }
-    }
+    
 })
 
 let cart= createSlice({
@@ -24,11 +20,15 @@ let cart= createSlice({
         },
         changeItem(state,action){
             state.push(action.payload)
+        },
+        deleteItem(state,action){
+            const index=state.findIndex((i)=>i.id===action.payload.id)
+            state.splice(index,1)
         }
     }
 })
 
-export let {changeCount,changeItem} = cart.actions
+export let {changeCount,changeItem,deleteItem} = cart.actions
 
 export default configureStore({
   reducer: { 

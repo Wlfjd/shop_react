@@ -21,9 +21,8 @@ function App() {
     <div className="App">
     <Navbar bg="light" variant="light">
         <Container>
-        <Navbar.Brand href="#home">Shoe Shop</Navbar.Brand>
+        <Navbar.Brand onClick={()=>navigate('/')}>Shoe Shop</Navbar.Brand>
         <Nav className="me-auto">   
-          <Nav.Link href="/detail">상세페이지</Nav.Link>
           <Nav.Link onClick={()=>navigate('/cart')}>장바구니</Nav.Link>
         </Nav>
         </Container>
@@ -51,6 +50,7 @@ function Main(){
   let [isLoading,setIsLoading]=useState(false)
 
    useEffect(()=>{
+    console.log(click)
     if(click===1){
       setIsLoading(true)
       axios.get('https://codingapple1.github.io/shop/data2.json')
@@ -82,7 +82,8 @@ function Main(){
         <Card data={shoes}></Card>     
       </Row>
     </Container>
-    {click <2 && <button className="alert alert-primary p-1" onClick={()=>{
+    {click < 2 && <button className="alert alert-primary p-1" onClick={()=>{
+      console.log(click)
      setClick((prev)=>prev+1) 
    }}>다음</button>}
    { isLoading && <p className="alert alert-danger"> 로딩중입니다</p>}
