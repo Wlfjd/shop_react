@@ -22,7 +22,7 @@ function App() {
     <Navbar bg="light" variant="light">
         <Container>
         <Navbar.Brand onClick={()=>navigate('/')}>Shoe Shop</Navbar.Brand>
-        <Nav className="me-auto">   
+        <Nav className="me-right">   
           <Nav.Link onClick={()=>navigate('/cart')}>장바구니</Nav.Link>
         </Nav>
         </Container>
@@ -45,7 +45,7 @@ function App() {
   );
 }
 function Main(){
-  let [shoes,setShoes]=useState(data);
+  let [shoes,setShoes]=useState(data); // 이건 갑자기 왜 무쓸모가 된거지?
   let [click,setClick]=useState(0);
   let [isLoading,setIsLoading]=useState(false)
 
@@ -56,9 +56,7 @@ function Main(){
       axios.get('https://codingapple1.github.io/shop/data2.json')
         .then((res)=>{
           data.push(...res.data)
-          setShoes((prev)=>[...prev,...res.data])
           setIsLoading(false)})
-          
         .catch(()=> {
           console.log('요청 실패')
           setIsLoading(false)})
@@ -66,7 +64,6 @@ function Main(){
       axios.get('https://codingapple1.github.io/shop/data3.json')
         .then((res)=>{
           data.push(...res.data)
-          setShoes((prev)=>[...prev,...res.data])
           setIsLoading(false)})
         .catch(()=> {
           console.log('요청 실패')

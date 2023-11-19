@@ -1,7 +1,5 @@
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import Button
- from 'react-bootstrap/Button';
 import { changeCount, deleteItem } from "../store";
 
 
@@ -12,14 +10,15 @@ let dispatch=useDispatch()
 
     return(
         <>
-        <h6>{state.user.name}의 장바구니</h6> 
+        <h6 className="my-4"><strong>{state.user.name}</strong> 의 장바구니</h6> 
         <Table>
             <thead>
-                <tr> 
-                <th>#</th>
+                <tr style={{fontSize:'12px'}}> 
+                <th>번호</th>
                 <th>상품명</th>
                 <th>수량</th>
-                <th>변경하기</th>
+                <th>변경</th>
+                <th>삭제</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,13 +27,12 @@ let dispatch=useDispatch()
                     <td>{item.id}</td>
                     <td>{item.name}</td>
                     <td>{item.count}</td>
-                    <td><button 
-                            className="alert alert-primary my-0 p-1"
+                    <td><span 
                             onClick={()=>{
-                                dispatch(changeCount(item.id))}}>+</button></td>
-                    <td><button 
+                                dispatch(changeCount(item.id))}}>➕</span></td>
+                    <td><span 
                             onClick={()=>{
-                                dispatch(deleteItem(item))}}>🗑</button></td>
+                                dispatch(deleteItem(item))}}>🗑</span></td>
                     </tr>
                 )}
             

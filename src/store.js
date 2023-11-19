@@ -9,8 +9,6 @@ let user=createSlice({
 let cart= createSlice({
     name:'cart',
     initialState: [
-        {id : 0, name : 'White and Black', count : 2},
-        {id : 2, name : 'Grey Yordan', count : 1}
       ], 
       //state 변경 함수 만드는 곳
     reducers:{
@@ -19,7 +17,12 @@ let cart= createSlice({
             state[index].count+=1
         },
         changeItem(state,action){
-            state.push(action.payload)
+            if(state.some(item=>item.id===action.payload.id)){
+                const index=state.findIndex((i)=>i.id===action.payload.id) //[0,1,...]
+                state[index].count+=1
+            }else {
+                state.push(action.payload)
+            }
         },
         deleteItem(state,action){
             const index=state.findIndex((i)=>i.id===action.payload.id)

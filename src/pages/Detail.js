@@ -9,9 +9,7 @@ import { changeItem } from '../store.js'
 
 
 export function Detail({data}){
-  let state2= useSelector((state)=>{return state})
   let dispatch=useDispatch()
-
   let {stock}= useContext(Context)
 
   let {id}= useParams()
