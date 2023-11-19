@@ -4,9 +4,8 @@ import { changeCount,  deleteItem } from "../store";
 
 
 export function Cart(){
-let state= useSelector((state)=>{return state})
-let dispatch=useDispatch()
-
+    let state= useSelector((state)=>{return state})
+    let dispatch=useDispatch()
     return(
         <>
         <h6 className="my-4"><strong>{state.user.name}</strong> 의 장바구니</h6> 

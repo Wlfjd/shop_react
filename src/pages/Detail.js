@@ -14,7 +14,6 @@ export function Detail({data}){
   let [show,setShow]=useState(true)
   let [tab,setTab]=useState(0)
 
-
   useEffect(()=>{
     setTimeout(()=>{
      setShow(false)
@@ -48,12 +47,12 @@ export function Detail({data}){
             <Nav.Link onClick={()=>setTab(2)} eventKey="link2">질문</Nav.Link>
           </Nav.Item>
       </Nav>
-      <TabContent tab={tab} data={data}/>
+      <TabContent tab={tab} data={data} id={id}/>
       </>
     )
   }
 
-  function TabContent({tab,data}){
+  function TabContent({tab,data,id}){
     let {stock}= useContext(Context)
     let [addClass,setAddClass]= useState(false)
 
@@ -66,7 +65,7 @@ export function Detail({data}){
 
     return (
       <div className={`start ${addClass ? 'end': ''}`}>
-        {[<div>{data[0].title}의 상세정보입니다<p>재고:{stock[0]}</p></div>,<div>구매 후기입니다</div>,<div>질문 게시판입니다</div>][tab]}
+        {[<div>{data[id].title}의 상세정보입니다<p>재고:{stock[id]}</p></div>,<div>구매 후기입니다</div>,<div>질문 게시판입니다</div>][tab]}
       </div>
     )
   }

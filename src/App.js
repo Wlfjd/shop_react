@@ -13,7 +13,7 @@ import { Cart } from './pages/Cart';
 export let Context= createContext()
 
 function App() {
-  let [stock,setStock]=useState([10,11,12])
+  let [stock,setStock]=useState([10,11,12,13,14,15,16,17,18,19])
 
   //페이지 이동을 도와주는 함수
   let navigate= useNavigate()
@@ -49,28 +49,22 @@ function Main(){
   let [click,setClick]=useState(0);
   let [isLoading,setIsLoading]=useState(false)
 
-   useEffect(()=>{
-    if(click===1){
-      setIsLoading(true)
-      axios.get('https://codingapple1.github.io/shop/data2.json')
-        .then((res)=>{
-          //data.push(...res.data)
-          setShoes((prev)=>[...prev,...res.data])
-          setIsLoading(false)})
-        .catch(()=> {
-          console.log('요청 실패')
-          setIsLoading(false)})
-    } else if (click===2){
-      axios.get('https://codingapple1.github.io/shop/data3.json')
-        .then((res)=>{
-        // data.push(...res.data)
-         setShoes((prev)=>[...prev,...res.data])
-          setIsLoading(false)})
-        .catch(()=> {
-          console.log('요청 실패')
-          setIsLoading(false)}) 
+   useEffect(() => {
+    if (click === 1 || click === 2) {
+      setIsLoading(true);
+      axios
+        .get(`https://codingapple1.github.io/shop/data${click + 1}.json`)
+        .then((res) => {
+          data.push(...res.data)
+          setShoes(data)
+          setIsLoading(false);
+        })
+        .catch(() => {
+          console.log('요청 실패');
+          setIsLoading(false);
+        });
     }
-  },[click])
+  }, [click]);
 
   return(
     <>
