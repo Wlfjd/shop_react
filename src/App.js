@@ -8,6 +8,7 @@ import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom'
 import { Detail } from './pages/Detail';
 import axios from 'axios';
 import { Cart } from './pages/Cart';
+import { useQuery } from '@tanstack/react-query';
 
 // state 보관함
 export let Context= createContext()
@@ -15,6 +16,7 @@ export let Context= createContext()
 function App() {
 
   useEffect(()=>{
+    //새로고침 시 초깃값으로 돌아가는거 방지
     if(!localStorage.getItem('watched')){
       localStorage.setItem('watched',JSON.stringify([]))
     }
@@ -24,13 +26,24 @@ function App() {
 
   //페이지 이동을 도와주는 함수
   let navigate= useNavigate()
+
+  const {data} = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => await axios.get("https://codingapple1.github.io/userdata.json"),
+  });
+
+  
+
   return (
     <div className="App">
-    <Navbar bg="light" variant="light">
+     <Navbar bg="light" variant="light">
         <Container>
         <Navbar.Brand onClick={()=>navigate('/')} style={{cursor:'pointer'}}>Shoe Shop</Navbar.Brand>
-        <Nav className="me-right">   
+        <Nav className="me-auto">   
           <Nav.Link onClick={()=>navigate('/cart')}>장바구니</Nav.Link>
+        </Nav>
+        <Nav className='ms-auto'>
+  
         </Nav>
         </Container>
       </Navbar>     

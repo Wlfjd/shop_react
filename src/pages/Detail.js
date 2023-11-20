@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { Col, Nav, Row } from 'react-bootstrap'
 import { Link, useParams } from "react-router-dom"
 import {Context} from './../App.js'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { changeItem } from '../store.js'
 
 
