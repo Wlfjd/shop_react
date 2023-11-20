@@ -15,7 +15,9 @@ export let Context= createContext()
 function App() {
 
   useEffect(()=>{
-    localStorage.setItem('watched',JSON.stringify([]))
+    if(!localStorage.getItem('watched')){
+      localStorage.setItem('watched',JSON.stringify([]))
+    }
   },[])
 
   let [stock,setStock]=useState([10,11,12,13,14,15,16,17,18,19])
