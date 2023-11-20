@@ -14,17 +14,9 @@ export let Context= createContext()
 
 function App() {
 
-
   useEffect(()=>{
-    localStorage.setItem('watched',[])
+    localStorage.setItem('watched',JSON.stringify([]))
   },[])
-
-  let obj= {name:'lee'}
-  localStorage.setItem('data',JSON.stringify(obj))
-  let data= localStorage.getItem('data')//JSON 형태
-  console.log(JSON.parse(data))
-
-
 
   let [stock,setStock]=useState([10,11,12,13,14,15,16,17,18,19])
 
@@ -99,7 +91,7 @@ function Card({data}){
   return(
     <>
       {data.map((item,i)=>(
-        <Col key={i} xs={4}>
+        <Col key={i} xs={4} >
             <Link to={`/detail/${i}`}>
             <img src={`https://codingapple1.github.io/shop/shoes${i+1}.jpg`} alt="img" width="80%" />
             <h4>{item.title}</h4>

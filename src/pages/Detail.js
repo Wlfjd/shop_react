@@ -1,8 +1,7 @@
 import React, { useContext } from 'react'
 import { useEffect, useState } from "react"
-import { Nav } from 'react-bootstrap'
-import { useParams } from "react-router-dom"
-
+import { Col, Nav, Row } from 'react-bootstrap'
+import { Link, useParams } from "react-router-dom"
 import {Context} from './../App.js'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeItem } from '../store.js'
@@ -13,6 +12,23 @@ export function Detail({data}){
   let {id}= useParams()
   let [show,setShow]=useState(true)
   let [tab,setTab]=useState(0)
+  let [watchedItem,setWatchedItem] = useState(localStorage.getItem('watched'))
+
+  useEffect(()=>{
+    let watched= JSON.parse(localStorage.getItem('watched'))
+
+    const isIdDuplicate = watched.some(item => item.id === id);
+     // 중복되지 않으면 watched에 새로운 객체 추가
+    if (!isIdDuplicate) {
+      watched.push({
+        id: id,
+        title: data[id].title,
+        image: `https://codingapple1.github.io/shop/shoes${Number(id) + 1}.jpg`
+      });
+      watched= Array.from(watched)
+      localStorage.setItem('watched',JSON.stringify(watched))
+      setWatchedItem(JSON.stringify(watched))}
+    },[])
 
   useEffect(()=>{
     setTimeout(()=>{
@@ -36,6 +52,19 @@ export function Detail({data}){
           </div>
         </div>
       </div> 
+      <div className='my-5'>
+        <p><b> 최근 본 상품 </b></p>       
+        <Row>
+        {JSON.parse(watchedItem).slice(-4).map((item,i)=>     
+        <Col key={i} xs={3} >
+            <Link to={`/detail/${item.id}`}>
+            <img src={item.image} alt="img" width="40%" />
+            <h4>{item.title}</h4>
+           </Link>
+          </Col>
+        )}
+        </Row>
+      </div>
       <Nav variant="tabs" className="my-5" fill defaultActiveKey="link0">
           <Nav.Item>
             <Nav.Link onClick={()=>setTab(0)} eventKey="link0">상세정보</Nav.Link>
