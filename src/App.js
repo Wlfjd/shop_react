@@ -13,6 +13,19 @@ import { Cart } from './pages/Cart';
 export let Context= createContext()
 
 function App() {
+
+
+  useEffect(()=>{
+    localStorage.setItem('watched',[])
+  },[])
+
+  let obj= {name:'lee'}
+  localStorage.setItem('data',JSON.stringify(obj))
+  let data= localStorage.getItem('data')//JSON 형태
+  console.log(JSON.parse(data))
+
+
+
   let [stock,setStock]=useState([10,11,12,13,14,15,16,17,18,19])
 
   //페이지 이동을 도와주는 함수
