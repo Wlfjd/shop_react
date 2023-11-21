@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { Col, Nav, Row } from 'react-bootstrap'
 import { Link, useParams } from "react-router-dom"
 import {Context} from './../App.js'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { changeItem } from '../store.js'
 
 
@@ -25,6 +25,7 @@ export function Detail({data}){
         title: data[id].title,
         image: `https://codingapple1.github.io/shop/shoes${Number(id) + 1}.jpg`
       });
+
       watched= Array.from(watched)
       localStorage.setItem('watched',JSON.stringify(watched))
       setWatchedItem(JSON.stringify(watched))}

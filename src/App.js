@@ -27,12 +27,25 @@ function App() {
   //페이지 이동을 도와주는 함수
   let navigate= useNavigate()
 
-  const {data} = useQuery({
+  // const result = useQuery({
+  //   queryKey: ["user"],
+  //   queryFn: async () => await axios.get("https://codingapple1.github.io/userdata.json"),
+  // });
+
+  const result = useQuery({
     queryKey: ["user"],
-    queryFn: async () => await axios.get("https://codingapple1.github.io/userdata.json"),
+    queryFn: async () => {
+      // 비동기 작업 수행
+      const response = await axios.get("https://codingapple1.github.io/userdata.json");
+      return response.data;
+    },
   });
 
+  if (result.isLoading) {
+    return <p>Loading...</p>;
+  }
   
+  console.log(result.data.name);
 
   return (
     <div className="App">
@@ -43,7 +56,9 @@ function App() {
           <Nav.Link onClick={()=>navigate('/cart')}>장바구니</Nav.Link>
         </Nav>
         <Nav className='ms-auto'>
-  
+          { result.isLoading && '로딩중' }
+          { result.error && 'error' }
+          { result.data && <div style={{fontSize:"12px"}}>반갑습니다 <b>{result.data.name}</b> 님</div> }
         </Nav>
         </Container>
       </Navbar>     
